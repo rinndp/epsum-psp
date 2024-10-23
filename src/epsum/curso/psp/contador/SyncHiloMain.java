@@ -5,7 +5,7 @@ class Contador {
 
     public synchronized void incrementar() {
         contador++;
-        System.out.println("Contador: " + contador);
+        System.out.println("Contador: " + this.contador);
         if (contador == 5) {
             System.out.println("TERMINADO HILO 1");
         }
@@ -13,7 +13,8 @@ class Contador {
 
     public synchronized void decrementar() {
         contador--;
-        System.out.println("Contador: " + contador);
+        System.out.println("Contador: " + this.contador);
+
     }
 }
 public class SyncHiloMain {
@@ -23,17 +24,27 @@ public class SyncHiloMain {
         Thread hilo1 = new Thread(() -> {
             for (int i = 0; i < 5; i++) {
                 contador1.incrementar();
+
             }
         });
 
         Thread hilo2 = new Thread(() -> {
             for (int i = 0; i < 5; i++) {
                 contador1.decrementar();
+
             }
         });
 
         hilo1.start();
         hilo2.start();
+
+        try {
+            hilo1.join();
+            hilo2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 }
