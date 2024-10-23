@@ -13,13 +13,16 @@ class Parking {
 
     public void entraCoche () throws InterruptedException {
         synchronized (this) {
-            if (contadorVehiculos == CAPACIDAD) {
-                wait();
-            }
             while (true) {
+
+                if (contadorVehiculos == CAPACIDAD) {
+                    wait();
+                }
+
                 listaCoches.add(contadorVehiculos);
-                System.out.println("Un coche entra al PARKING: " + contadorVehiculos);
                 contadorVehiculos++;
+                System.out.println("Un coche ENTRA al parking: coche número " + contadorVehiculos);
+
 
                 Thread.sleep(1000);
                 notify();
@@ -30,16 +33,16 @@ class Parking {
 
     public void saleCoche () throws InterruptedException {
         synchronized (this) {
-            if (contadorVehiculos == 0) {
-                wait();
-            }
-
             while (true) {
+                if (contadorVehiculos == 0) {
+                    wait();
+                }
+
                 listaCoches.removeFirst();
-                System.out.println("Un coche sale al PARKING: " + contadorVehiculos);
+                System.out.println("Un coche SALE del parking: coche número " + contadorVehiculos);
                 contadorVehiculos--;
 
-                Thread.sleep(1000);
+                Thread.sleep(1500);
                 notify();
             }
 
