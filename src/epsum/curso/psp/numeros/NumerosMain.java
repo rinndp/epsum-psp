@@ -3,7 +3,6 @@ package epsum.curso.psp.numeros;
 class ContadorGeneral {
     int contadorImpar = 1;
     int contadorPar = 2;
-    int contadorTotal = 0;
 
     public void imprimirNumeroPar() throws InterruptedException {
         synchronized (this) {
@@ -42,11 +41,11 @@ class ContadorGeneral {
 }
 public class NumerosMain {
     public static void main(String[] args) {
-        ContadorGeneral incrementar = new ContadorGeneral();
+        ContadorGeneral contadorGeneral = new ContadorGeneral();
 
         Thread hiloImpar = new Thread(() -> {
             try {
-                incrementar.imprimirNumeroImpar();
+                contadorGeneral.imprimirNumeroImpar();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -54,14 +53,13 @@ public class NumerosMain {
 
         Thread hiloPar = new Thread(() -> {
             try {
-                incrementar.imprimirNumeroPar();
+                contadorGeneral.imprimirNumeroPar();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         });
         hiloImpar.start();
         hiloPar.start();
-
-
+        
     }
 }
