@@ -1,10 +1,18 @@
-package epsum.curso.psp.ejemplo4;
+package epsum.curso.psp.contador;
 
 class Contador {
     private int contador = 0;
 
     public synchronized void incrementar() {
         contador++;
+        System.out.println("Contador: " + contador);
+        if (contador == 5) {
+            System.out.println("TERMINADO HILO 1");
+        }
+    }
+
+    public synchronized void decrementar() {
+        contador--;
         System.out.println("Contador: " + contador);
     }
 }
@@ -20,7 +28,7 @@ public class SyncHiloMain {
 
         Thread hilo2 = new Thread(() -> {
             for (int i = 0; i < 5; i++) {
-                contador1.incrementar();
+                contador1.decrementar();
             }
         });
 
