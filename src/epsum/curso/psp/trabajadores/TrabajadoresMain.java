@@ -8,7 +8,7 @@ class Fabrica {
         }
     }
 
-    public synchronized void llegarMaterial () throws InterruptedException {
+    public synchronized void llegaMaterial () throws InterruptedException {
         Thread.sleep(4000);
         material = true;
         System.out.println("El material ha llegado");
@@ -45,6 +45,6 @@ public class TrabajadoresMain {
         hilo2.start();
         hilo3.start();
 
-        fabrica.llegarMaterial();
+        fabrica.llegaMaterial();
     }
 }
