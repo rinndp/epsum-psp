@@ -1,11 +1,10 @@
 package epsum.curso.psp.ejercicioterminal;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class EjecutarScriptMain {
+public class EjecutarScriptPowershellMain {
     public static void main(String[] args) {
         String ruta = "C:\\Users\\ALUMNO\\Documents\\script.ps1";
 
