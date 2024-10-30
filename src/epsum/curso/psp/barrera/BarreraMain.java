@@ -4,6 +4,7 @@ class Camino {
     int contadorHilos = 0;
     boolean continuar = true;
     final int TOTAL_HILOS = 3;
+
     public Camino() {}
 
     public synchronized void esperarHilos() throws InterruptedException {
