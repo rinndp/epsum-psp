@@ -26,8 +26,8 @@ class Trabajador implements Runnable {
     @Override
     public void run() {
         try {
-            fabrica.esperarMaterial();
-            System.out.println("Trabajador "+Thread.currentThread().getName()+" ha empezado a trabajar");
+            this.fabrica.esperarMaterial();
+            System.out.println("El trabajador "+Thread.currentThread().getName()+" ha empezado a trabajar");
 
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
