@@ -4,13 +4,17 @@ class Fabrica {
     boolean empezarTrabajo = false;
 
     public synchronized void esperarTrabajo() throws InterruptedException {
-        while(!empezarTrabajo) {
+        while (!empezarTrabajo) {
             System.out.println("Esperando trabajo...");
-            Thread.sleep(2000);
-            System.out.println("EMPEZANDO TRABAJO");
-            Thread.sleep(1000);
-            empezarTrabajo = true;
+            wait();
         }
+    }
+
+    public synchronized void comienzaTrabajo() throws InterruptedException {
+        Thread.sleep(4000);
+        System.out.println("EMPEZANDO TRABAJO");
+        Thread.sleep(1000);
+        empezarTrabajo = true;
         notifyAll();
     }
 }
@@ -38,7 +42,18 @@ public class FabricaRepasoMain {
         Thread trabajador1 = new Thread(new Trabajador(fabrica), "Pablo");
         Thread trabajador2 = new Thread(new Trabajador(fabrica), "Pepe");
 
+        Thread empezarTrabajoHilo = new Thread(() -> {
+            try {
+                fabrica.comienzaTrabajo();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         trabajador1.start();
         trabajador2.start();
+        empezarTrabajoHilo.start();
+
+
     }
 }
